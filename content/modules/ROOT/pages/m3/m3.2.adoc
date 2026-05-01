@@ -1,5 +1,5 @@
 :imagesdir: ../../assets/images
-:page-time: 5
+:page-time: 8
 include::partial$style.adoc[]
 
 [id="kafka-to-rocketchat"]
@@ -309,6 +309,20 @@ Run the process in the background using _Camel JBang_:
 labrun k2r --background
 ****
 
+[TIP]
+--
+.What does this command do?
+[%collapsible]
+====
+`labrun` is a lab helper that runs Camel JBang behind the scenes. The command above is equivalent to:
+
+* `camel run --name k2r` — runs the integration named `k2r`
+* `--source-dir k2r` — loads route files from the `k2r` directory
+* `--local-kamelet-dir ../support/kamelets` — loads custom Kamelets (connectors), including the Rocket.Chat one
+* `--background` — runs the process in the background so you can continue working in the terminal
+====
+--
+
 {empty} +
 
 Verify the process is running:
@@ -331,7 +345,7 @@ You should see the process in `Running` status:
 
 {empty} +
 
-Before sending a test message, make sure _Rocket.Chat_ is open and you're in your designated room. If you haven't logged in yet, follow the instructions in xref:m2/m2.2.adoc[Rocket.Chat platform onboarding].
+Before sending a test message, make sure _Rocket.Chat_ is open and you're in your designated room. If you haven't logged in yet, follow the instructions in xref:m2/m2.2.adoc[Rocket.Chat platform onboarding,window=_blank].
 
 Once ready, send a test message to _Kafka_:
 

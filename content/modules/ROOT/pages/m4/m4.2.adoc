@@ -1,5 +1,5 @@
 :imagesdir: ../../assets/images
-:page-time: 7
+:page-time: 11
 include::partial$style.adoc[]
 
 [id='lab4-agentic-flow']
@@ -288,7 +288,7 @@ The bot responds with something like:
 :fig-bot-msg: I'm sorry, I don't have the capability to retrieve that PDF right now.
 include::_figures/rc-interaction.adoc[]
 +
-The bot knows what it _should_ do — the system prompt describes its role and capabilities — but the tools are not yet visible to the agent, so it can't act on any request.
+The bot knows what to do from the system prompt which describes its role and capabilities, but the tools are not yet visible to the agent, so it can't act on any request.
 +
 [TIP]
 --
@@ -362,7 +362,40 @@ Go back to _Rocket.Chat_ and ask:
 What about now?
 ****
 +
-This time the LLM discovers the tool, calls it, and responds with the invoice:
+[TIP]
+--
+.What if the AI still says it can't help?
+[%collapsible]
+====
+The workshop uses a small LLM that can be inconsistent. The system prompt tells it to re-evaluate its tools before responding, but sometimes it replies as if no tools are available, for example:
+
+{blank}
+
+:fig-time: 5:10 PM
+:fig-user-msg: What about now?
+:fig-bot-msg: I'm sorry, I don't have the capability to retrieve that PDF right now.
+include::_figures/rc-interaction.adoc[]
+
+If that happens, try one or both of these options:
+
+1. Send a more specific request:
++
+{blank}
++
+[.copypaste]
+****
+Please try again using the tool to get invoices
+****
++
+This points the LLM to the right tool, which is usually enough to get it working.
++
+{blank}
+2. Stop the process with kbd:[CTRL+C] and restart it. A fresh start gives the LLM a clean tool list.
+
+====
+--
++
+If all goes well, this time the LLM discovers the tool, calls it, and responds with the invoice:
 +
 {blank}
 +
@@ -373,13 +406,17 @@ This time the LLM discovers the tool, calls it, and responds with the invoice:
 :fig-attach-desc: Click to view or download
 include::_figures/rc-interaction-attach.adoc[]
 +
-{empty} +
+{blank}
 +
-The bot found the right tool to retrieve the invoice PDF, called it to generate a pre-signed S3 URL, and returned the link to the support agent — all from a single natural language request. Clicking the link opens the PDF in a new tab.
+The bot identified the right tool, retrieved the invoice, and returned a download link to the support agent. Clicking the link opens the PDF in a new tab.
++
+{blank}
 +
 .See the sample invoice
 [%collapsible]
 =====
+{blank}
+
 include::_figures/invoice-pdf.adoc[]
 =====
 
@@ -426,12 +463,14 @@ Either way, the bot responds with the updated PDF link:
 :fig-attach-desc: Click to view or download
 include::_figures/rc-bot-attach.adoc[]
 
-Click the link to open the updated PDF.
+Click the link to open the regenerated invoice.
 
-.See the amended invoice
+{blank}
+
+.See a sample of the amended invoice
 [%collapsible]
 ====
-Taking our previous invoice sample as reference, the amended document would look approximately like this:
+{blank}
 
 include::_figures/invoice-pdf-amended.adoc[]
 ====
@@ -464,7 +503,7 @@ include::_figures/rc-interaction.adoc[]
 
 {empty} +
 
-IMPORTANT: Before going any further, make sure you have already onboarded to _Matrix_ and accepted the room invitation — the ticket will be shared with the customer there. Remember, _Matrix_ represents the customer side, while _Rocket.Chat_ is where the support agent works. If you haven't done this yet, follow the xref:m2/m2.1.adoc[Matrix platform onboarding] instructions.
+IMPORTANT: Before going any further, make sure you have already onboarded to _Matrix_ and accepted the room invitation — the ticket will be shared with the customer there. Remember, _Matrix_ represents the customer side, while _Rocket.Chat_ is where the support agent works. If you haven't done this yet, follow the xref:m2/m2.1.adoc[Matrix platform onboarding,window=_blank] instructions.
 
 The interaction above illustrates a simple request and response — but because LLMs are non-deterministic, the bot may have responded differently. Here's what to expect and how to handle each case:
 

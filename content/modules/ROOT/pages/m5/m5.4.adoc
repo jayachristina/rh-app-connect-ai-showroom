@@ -320,5 +320,3 @@ You have successfully applied tiered token rate limiting with a graceful degrada
 [.fail]
 Ensure both the AuthPolicy and TokenRateLimitPolicy show Enforced status. Wait for the token budgets to renew and try again.
 ****
-
-{empty} +

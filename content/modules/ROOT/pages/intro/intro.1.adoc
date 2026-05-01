@@ -1,5 +1,5 @@
 :imagesdir: ../../assets/images
-:page-time: 1
+:page-time: 2
 include::partial$style.adoc[]
 
 [id="workshop-journey"]

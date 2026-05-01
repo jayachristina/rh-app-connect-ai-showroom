@@ -1,5 +1,5 @@
 :imagesdir: ../../assets/images
-:page-time: 4
+:page-time: 3
 include::partial$style.adoc[]
 
 [id='lab5-govern-ai-consumption']
@@ -43,12 +43,11 @@ flowchart LR
     AI5@{ img: "../_images/common/ai-icon.svg", label: "AI Assistant", pos: "b", h: 80, w: 80, constraint: "on" }
     GP@{ img: "../_images/common/profile-icon.svg", label: "Gold Profile", pos: "b", h: 80, w: 70, constraint: "on" }
     SP@{ img: "../_images/common/profile-silver-icon.svg", label: "Silver Profile", pos: "b", h: 80, w: 70, constraint: "on" }
-
-    style AGT5 fill:none,stroke:none
-    style AI5 fill:none,stroke:none
     GW@{ img: "../_images/common/guardrail-icon.svg", label: "Connectivity Link", pos: "b", h: 80, w: 80, constraint: "on" }
     LLM@{ img: "../_images/common/ai-model-icon.svg", label: "LLM", pos: "b", h: 80, w: 80, constraint: "on" }
 
+    style AGT5 fill:none,stroke:none
+    style AI5 fill:none,stroke:none
     style GW fill:none,stroke:none
     style GWp fill:none,stroke:none,width:1px,height:1px
     style GWp2 fill:none,stroke:none,width:1px,height:1px
@@ -61,7 +60,7 @@ Gold consumes more tokens because the analysis is deeper and the response is ric
 
 But before any of this works, you need governance. Who can access the LLM endpoint? How many tokens can each tier consume? Without controls, there is nothing stopping unchecked consumption from burning through the organization's API budget.
 
-In this lab, you'll place a **governance layer** in front of the LLM endpoint using link:https://www.redhat.com/en/technologies/cloud-computing/connectivity-link[*_Red Hat Connectivity Link_*]. You'll implement two policies:
+In this lab, you'll place a **governance layer** in front of the LLM endpoint using link:https://www.redhat.com/en/technologies/cloud-computing/connectivity-link[*_Red Hat Connectivity Link_*,window=_blank]. You'll implement two policies:
 
 * **AuthPolicy** -- Control _who_ can access the endpoint using API key authentication and group-based authorization.
 * **TokenRateLimitPolicy** -- Control _how much_ each tier can consume by enforcing rate limits based on actual token usage.
@@ -70,7 +69,7 @@ In this lab, you'll place a **governance layer** in front of the LLM endpoint us
 
 === Why Connectivity Link?
 
-This is exactly the kind of problem _Red Hat Connectivity Link_ was designed for. Built on the link:https://kuadrant.io/[_Kuadrant_ project], it brings AI-aware governance to _Kubernetes_:
+This is exactly the kind of problem _Red Hat Connectivity Link_ was designed for. Built on the link:https://kuadrant.io/[_Kuadrant_ project,window=_blank], it brings AI-aware governance to _Kubernetes_:
 
 * **Token-aware rate limiting** -- limits are based on actual tokens consumed, not request counts. This is what makes tiered AI services viable: each tier gets its own token budget, enforced at the gateway.
 * **Zero code changes** -- policies are applied at the infrastructure level. Your AI agent and integration code stay untouched.
@@ -90,6 +89,7 @@ Here are the building blocks:
 * **GatewayClass + Gateway** -- owned by the platform team. Defines _how_ traffic enters the cluster. Already provisioned for you.
 * **HTTPRoute** -- owned by the platform or development team. Defines _where_ your traffic goes (in this case, the LLM API).
 
+[.text-center]
 [.mermaid]
 [subs="attributes"]
 ----
@@ -136,29 +136,37 @@ This is where Connectivity Link comes in. Rather than embedding governance in yo
 
 [.mermaid]
 ----
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '18px'}}}%%
+---
+config:
+  markdownAutoWrap: false
+---
 flowchart LR
-    Client([Client])
+    Client([App])
     Gateway[Gateway]
 
     subgraph S1 ["HTTPRoute"]
+        direction LR
         subgraph S2 [" "]
+            direction LR
             Auth[Auth Policy]
             RateLimit[Token Rate Limit Policy]
             Auth ~~~ RateLimit
         end
+        
+        A@{ shape: braces, label: "<i>Connectivity Link policies attach to Gateway API resources</i>" }
     end
 
     Service[Service]
     Pod1[Pod]
     Pod2[Pod]
 
-    Client -.->|HTTP request| Gateway --> S1 -->|routing rule| Service
+    Client -.->|HTTP request| Gateway --> S2 -->|routing rule| Service
     Service --> Pod1
     Service --> Pod2
 
-    style S1 fill:#e8eaf6,stroke:#7986cb
-    style S2 fill:none,stroke:none
+
+    style S2 fill:#e8eaf6,stroke:#7986cb
+    style S1 fill:none,stroke:none
     style Client fill:#f5f5f5,stroke:#ccc
     style Gateway fill:#fff,stroke:#7986cb
     style Auth fill:#fff3e0,stroke:#fb8c00
@@ -167,52 +175,44 @@ flowchart LR
     style Pod1 fill:#336,color:#fff
     style Pod2 fill:#336,color:#fff
 ----
-++++
-<p style="text-align: center; margin-top: -2rem; padding-right: 0rem; font-style: italic; color: #555">Connectivity Link policies attach to Gateway API resources</p>
-++++
-
-{empty} +
 
 === End-to-End Request Flow
 
-Now that you understand the model, here's how it maps to your setup. You'll use the same Rocket.Chat interface to interact with the AI agent -- the request flows from the chat client, through the governance layer, to the LLM API:
+Now that you understand the model, here's how it maps to your setup. The support agent interacts with the AI assistant, which sends requests through the gateway and governance layer before reaching the LLM:
+
+{blank}
 
 [.mermaid]
 ----
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '18px'}}}%%
 flowchart LR
-    subgraph outerLabel [" "]
-        subgraph outer [" "]
-            Client([Rocket.Chat])
-            Gateway[AI Gateway]
-            LLM[LLM API]
-
-            subgraph S2 ["HTTP Route"]
-                subgraph S3 ["Connectivity Link"]
-                    Auth[Auth Policy]
-                    Token[Token Rate Limit]
-                end
-            end
-        end
-    end
-
-    Client -->|api key| Gateway
+    Agent --> Bot
+    Bot -->|api key| Gateway
     Gateway --> S2
     Auth -->|userid + group| Token
     S2 --> LLM
 
-    style outerLabel fill:none,stroke:none
-    style outer fill:none,stroke:none
-    style S2 fill:#fff,stroke:#7986cb
-    style S3 fill:#e8eaf6,stroke:#7986cb
-    style Client fill:#f5f5f5,stroke:#ccc
+    subgraph S2 ["HTTPRoute"]
+        subgraph S3 ["Connectivity Link"]
+            Auth[Auth Policy]
+            Token[Token Rate Limit]
+        end
+    end
+
+    Agent@{ img: "../_images/common/agent-icon.svg", label: "Support Agent", pos: "b", h: 80, w: 80, constraint: "on" }
+    Bot@{ img: "../_images/common/ai-icon.svg", label: "AI Assistant", pos: "b", h: 80, w: 80, constraint: "on" }
+    LLM@{ img: "../_images/common/ai-model-icon.svg", label: "LLM", pos: "b", h: 80, w: 80, constraint: "on" }
+
+    style Agent fill:none,stroke:none
+    style S2 fill:#e8eaf6,stroke:#7986cb
+    style S3 fill:#e3f2fd,stroke:#7986cb
+    style Bot fill:none,stroke:none
     style Gateway fill:#fff,stroke:#7986cb
-    style Auth fill:#fff,stroke:#7986cb
-    style Token fill:#fff,stroke:#7986cb
-    style LLM fill:#336,color:#fff
+    style LLM fill:none,stroke:none
+    style Auth fill:#fff3e0,stroke:#fb8c00
+    style Token fill:#fff3e0,stroke:#fb8c00
 ----
 
-The same architecture applies regardless of the client -- whether it's Rocket.Chat, an internal chatbot, or an external application.
+The same architecture applies regardless of how the support agent connects: through Rocket.Chat, an internal chatbot, or any other application.
 
 
 

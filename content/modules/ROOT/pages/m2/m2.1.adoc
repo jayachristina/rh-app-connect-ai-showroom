@@ -1,5 +1,5 @@
 :imagesdir: ../../assets/images
-:page-time: 2
+:page-time: 1
 include::partial$style.adoc[]
 
 [id="matrix-chat"]

@@ -46,7 +46,7 @@ image::m3/openshift-topology-flows.png[width=60%]
 
 === Start the flows
 
-Scale up all four deployments to start the flows:
+From your _Dev Spaces_ terminal, scale up all four deployments to start the flows:
 
 {blank}
 
@@ -77,8 +77,8 @@ image::m3/openshift-topology-running.png[width=60%]
 
 Now that all flows are running, it's time to simulate a conversation between customer and support agent. Make sure both platforms are open:
 
-* xref:m2/m2.1.adoc[Matrix platform onboarding] — the customer side
-* xref:m2/m2.2.adoc[Rocket.Chat platform onboarding] — the support agent side
+* xref:m2/m2.1.adoc[Matrix platform onboarding,window=_blank] — the customer side
+* xref:m2/m2.2.adoc[Rocket.Chat platform onboarding,window=_blank] — the support agent side
 
 {empty} +
 

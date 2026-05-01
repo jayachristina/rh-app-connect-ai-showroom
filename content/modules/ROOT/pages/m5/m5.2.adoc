@@ -33,6 +33,8 @@ Confirm everything is ready before starting the labs:
 
 . From the terminal in your Dev Spaces IDE, run the following command to check that gateway is up and running:
 +
+{blank}
++
 [.copypaste]
 ****
 oc get gateway internal-ai-gateway -n ai-gateway
@@ -42,13 +44,19 @@ oc get gateway internal-ai-gateway -n ai-gateway
 
 . You should see output confirming the gateway exists and is in a ready state, similar to:
 +
+{blank}
++
 ++++
-<pre style="background-color: #272822; padding: 10px 15px; line-height: 1.4; white-space: pre; overflow-x: auto; font-family: monospace; font-size: 14px; color: white">NAME               CLASS               ADDRESS                                                           PROGRAMMED   AGE
+<pre style="background-color: #272822; padding: 10px 15px; line-height: 1.4; white-space: pre; overflow-x: auto; font-family: monospace; font-size: 13px; color: white">NAME                  CLASS               ADDRESS                                                              PROGRAMMED   AGE
 internal-ai-gateway   openshift-default   internal-ai-gateway-openshift-default.ai-gateway.svc.cluster.local   True         14h</pre>
 ++++
 {empty} +
 
-. A dedicated HTTPRoute named `ai-proxy-route` has been created in your namespace `{user-username}-devspaces`, targeting the LLM API. This is the Gateway API resource you'll attach authentication and rate limiting policies to. Run the following command to verify it is present:
+. A dedicated HTTPRoute named `ai-proxy-route` has been created in your namespace `{user-username}-devspaces`, targeting the LLM API. This is the Gateway API resource you'll attach authentication and rate limiting policies to.
++
+Run the following command to verify it is present:
++
+{blank}
 +
 [.copypaste]
 ****
@@ -61,32 +69,24 @@ This command lists the HTTPRoute details including the backend reference to the 
 
 . Look for output confirming the HTTPRoute exists and is correctly configured, similar to:
 +
+{blank}
++
 ++++
-<pre style="background-color: #272822; padding: 10px 15px; line-height: 1.4; white-space: pre-wrap; font-family: monospace; font-size: 14px; color: white">Name:         ai-proxy-route
-    Name:       internal-ai-gateway
-    Backend Refs:
-      Name:       ai-api-external
-          Name:   Host
-          Name:   Authorization
-    Controller Name:         openshift.io/gateway-controller/v1
-      Name:       internal-ai-gateway</pre>
+<pre style="background-color: #181818; padding: 10px 15px; line-height: 1.4; white-space: pre-wrap; font-family: monospace; font-size: 14px; color: #CBCBCB"><span style="color: #F14C4B;font-weight:bold">Name:</span>         ai-proxy-route
+    <span style="color: #F14C4B;font-weight:bold">Name:</span>       internal-ai-gateway
+    <span style="color: #F14C4B;font-weight:bold">Backend </span>Refs:
+      <span style="color: #F14C4B;font-weight:bold">Name:</span>       ai-api-external
+          <span style="color: #F14C4B;font-weight:bold">Name:</span>   Host
+    Controller<span style="color: #F14C4B;font-weight:bold"> Name:</span>         kuadrant.io/policy-controller
+      <span style="color: #F14C4B;font-weight:bold">Name:</span>       internal-ai-gateway
+    Controller<span style="color: #F14C4B;font-weight:bold"> Name:</span>         openshift.io/gateway-controller/v1
+      <span style="color: #F14C4B;font-weight:bold">Name:</span>       internal-ai-gateway
+
 ++++
 
+{empty} +
 
-
-
-
-
-[.verification]
-****
-Were you able to list the `internal-ai-gateway` Gateway and `ai-proxy-route` HTTPRoute?
-
-[.success]
-Your environment is ready. Proceed to Next step.
-
-[.fail]
-Contact the workshop facilitator to ensure your namespace is properly provisioned.
-****
+NOTE: You should see both the `internal-ai-gateway` Gateway and `ai-proxy-route` HTTPRoute in the output. If either is missing, contact the workshop facilitator.
 
 {empty} +
 
@@ -94,6 +94,8 @@ Contact the workshop facilitator to ensure your namespace is properly provisione
 Now that you understand the concepts and the intended architecture, it's time to lock down the LLM endpoint. In this exercise you will create an **AuthPolicy** that is applied to the HTTPRoute (`ai-proxy-route`)  and enforces a key-based authentication scheme. This will ensure that only authorized users with a valid API key can access the LLM, and it will extract identity information that we can use for rate limiting in the next step.
 
 NOTE: We are using simple API key authentication for this workshop to keep things straightforward and simple, but _Connectivity Link_ supports a wide range of authentication methods, including JWT, OAuth2 and more.
+
+{empty} +
 
 === Understanding the User Secrets
 
@@ -224,34 +226,34 @@ Key fields in this policy:
 
 {empty} +
 
-
-{empty} +
-
 === Verify the AuthPolicy
 
 {blank}
 
 . From the devspaces terminal, run the following command to check that the AuthPolicy was created successfully:
 +
+{blank}
++
 [.copypaste]
 ****
-oc describe authpolicy -n {user-username}-devspaces | grep -E "Name:|Target Ref:|Type:|Status:"
+oc describe authpolicy -n {user-username}-devspaces | grep -v "Content" | grep -E "Name:|Target Ref:|Type:|Status:"
 ****
-
++
+{blank}
 . You should see output confirming the AuthPolicy exists, is targeting the correct HTTPRoute, and is in an enforced state, similar to:
 +
+{blank}
++
 ++++
-<pre style="background-color: #272822; padding: 10px 15px; line-height: 1.4; white-space: pre-wrap; font-family: monospace; font-size: 14px; color: white">Name:         ai-proxy-auth
-  Target Ref:
-    Name:   ai-proxy-route
-Status:
-    Status:                True
-    Type:                  Accepted
-    Status:                True
-    Type:                  Enforced</pre>
+<pre style="background-color: #272822; padding: 10px 15px; line-height: 1.4; white-space: pre-wrap; font-family: monospace; font-size: 14px; color: white"><span style="color: #F14C4B;font-weight:bold">Name:</span>         ai-proxy-auth
+  <span style="color: #F14C4B;font-weight:bold">Target Ref:</span>
+    <span style="color: #F14C4B;font-weight:bold">Name:</span>   ai-proxy-route
+<span style="color: #F14C4B;font-weight:bold">Status:</span>
+    <span style="color: #F14C4B;font-weight:bold">Status:</span>                True
+    <span style="color: #F14C4B;font-weight:bold">Type:</span>                  Accepted
+    <span style="color: #F14C4B;font-weight:bold">Status:</span>                True
+    <span style="color: #F14C4B;font-weight:bold">Type:</span>                  Enforced</pre>
 ++++
-{empty} +
-
 {empty} +
 
 [.verification]
@@ -264,5 +266,3 @@ The AuthPolicy is enforced. Proceed to test authentication.
 [.fail]
 Check that you pasted the correct YAML and that the namespace is set to `{user-username}-devspaces`.
 ****
-
-{empty} +

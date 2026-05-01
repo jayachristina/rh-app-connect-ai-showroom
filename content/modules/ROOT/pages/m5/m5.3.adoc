@@ -353,5 +353,3 @@ The AuthPolicy is working as expected -- unauthenticated requests are blocked an
 [.fail]
 Check that both API keys in `application.properties` are populated (not `EMPTY`) and that the camel agent restarted successfully.
 ****
-
-{empty} +

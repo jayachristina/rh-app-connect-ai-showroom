@@ -1,5 +1,5 @@
 :imagesdir: ../../assets/images
-:page-time: 10
+:page-time: 8
 include::partial$style.adoc[]
 
 [id='lab3-service-interconnect']

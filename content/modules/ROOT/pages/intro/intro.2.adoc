@@ -1,5 +1,5 @@
 :imagesdir: ../../assets/images
-:page-time: 2
+:page-time: 5
 include::partial$style.adoc[]
 
 [id='dev-environment']
@@ -13,7 +13,7 @@ The following instructions introduce you to your development environment, and th
 Built on the open Eclipse Che project, Red Hat OpenShift Dev Spaces uses Kubernetes and containers to provide any member of the development or IT team with a consistent, secure, and zero-configuration development environment. The experience is as fast and familiar as an integrated development environment on your laptop.
 
 [.text-center]
-image::intro/devspaces-ide-developer.jpg[width=70%]
+image::intro/devspaces-ide-developer.png[width=70%]
 
 OpenShift Dev Spaces is included with your OpenShift subscription and is available in the Operator Hub. It provides development teams a faster and more reliable foundation on which to work, and it gives operations centralized control and peace of mind.
 
