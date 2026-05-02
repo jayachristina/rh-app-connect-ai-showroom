@@ -5,23 +5,12 @@ include::partial$style.adoc[]
 [id="setup"]
 == Setup the Lab working folder
 
-The following set of instructions prepare the set of files you will be working with:
+[.indent2]
+include::../_shared/close-tabs.adoc[]
 
-. Close tabs
-+
-Before you start this second lab, make sure you close in your editor all the tabs (source files) from the previous exercise.
-+
-image::m3/dev-close-tabs.png[width=100%]
+. From your terminal in _Dev Spaces_, run the following command:
 +
 {blank}
-+
-1. Click on the file explorer's `...` button +
-1. Ensure your `Open Editors` is ticked [√] +
-1. Click the `Close all Editors` button.
-+
-{empty} +
-
-. Setup your Lab folder
 +
 [.copypaste]
 ****
@@ -73,8 +62,6 @@ The `application.properties` file contains pre-configured connection settings fo
 =====
 ====
 
-[.indent2]
-NOTE: Make sure the files are visible in your file explorer in the left panel of _VSCode_.
 --
 +
 {empty} +

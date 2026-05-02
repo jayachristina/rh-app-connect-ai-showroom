@@ -242,20 +242,6 @@ NOTE: The order number in this request is illustrative -- the Customer Profile T
 +
 Since the Gold token budget is still fresh, the system should produce a *GOLD TIER ANALYSIS*, just like in the previous exercise.
 +
-[TIP]
---
-.Sample Gold analysis
-[%collapsible]
-====
-{blank}
-
-:fig-time: 6:49 PM
-include::_figures/rc-gold-profile.adoc[]
-
-Because LLM responses are non-deterministic, the exact wording may differ. What matters is the *GOLD TIER ANALYSIS* banner and the four sections: Customer Profile, Sentiment & Risk, Open Issues, and Recommended Action.
-====
---
-+
 {empty} +
 
 . Test again to see the system switch to Silver.

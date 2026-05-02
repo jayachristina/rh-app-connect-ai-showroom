@@ -5,28 +5,12 @@ include::partial$style.adoc[]
 [id="setup-lab5"]
 == Setup the Lab working folder
 
+[.indent2]
+include::../_shared/close-tabs.adoc[]
 
-{empty} +
-
-The following steps prepare the files you'll need for this exercise:
-
-. Close tabs
-+
-Before you start, make sure you close in your editor all the tabs (source files) from the previous exercise.
-+
-image::m4/dev-close-tabs.png[width=100%]
+. From your terminal in _Dev Spaces_, run the following command:
 +
 {blank}
-+
-1. Click on the file explorer's `...` button +
-1. Ensure your `Open Editors` is ticked [√] +
-1. Click the `Close all Editors` button.
-+
-NOTE: If you do not have your devspaces environment open, click link:{url-codeready}[Red Hat OpenShift Dev Spaces, window="_blank"] to open it now and start a new terminal. 
-+
-{empty} +
-
-. Setup your working folder
 +
 [.copypaste]
 ****
@@ -51,9 +35,6 @@ pass:[<mark style="padding-left: 1rem; background-color: white; color: grey"><b>
 pass:[<mark style="padding-left: 1rem; background-color: white; color: #b07219"><b>&nbsp;J&nbsp;&nbsp;</b></mark>] *PdfRenderer.java* +
 pass:[<mark style="padding-left: 1rem; background-color: white; color: #b07219"><b>&nbsp;J&nbsp;&nbsp;</b></mark>] *s3Presigner.java* +
 pass:[<mark style="padding-left: 1rem; background-color: white; color: grey"><b>&nbsp;≡&nbsp;&nbsp;</b></mark>] *template-pdf.xsl* +
-
-[.indent2]
-NOTE: Make sure the files are visible in your file explorer in the left panel of Dev Spaces.
 --
 +
 {empty} +

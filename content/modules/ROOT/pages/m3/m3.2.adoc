@@ -258,12 +258,11 @@ room11
 "REPLACE"
 ****
 +
-[TIP]
 --
-.How do I paste the value?
-[%collapsible]
+.To paste the value:
+[caption=]
 ====
-Click `⠇` and select **Add selector expression**, as shown below:
+Click kbd:[⠇] and select kbd:[Add selector expression], as shown below:
 
 image::m3/mapper-add-expression.jpg[width=70%]
 ====

@@ -194,7 +194,13 @@ Now replace the dummy response with a real AI agent. Head back to the _Kaoto_ ca
 
 . *Enable the system prompt*
 +
-The `set system prompt` step is currently disabled — it's greyed out because there was no AI agent to use it. Now that you're about to add one, enable it: hover the step and click the {btn-enable} button (next to the {nbsp}{btn-replace}{nbsp} button).
+The `set system prompt` step is currently disabled — it's greyed out because there was no AI agent to use it.
++
+.Enable it:
+[caption=]
+====
+Hover the step and click the {btn-enable} button (next to the {nbsp}{btn-replace}{nbsp} button).
+====
 +
 {empty} +
 
@@ -263,7 +269,11 @@ include::_figures/rc-interaction.adoc[]
 +
 {empty} +
 +
-The agent is responding — but can it do real work? +
+The bot is responding, but can it do real work? +
+*Not yet*. The tools exist in the project but are not active yet.
++
+{blank}
++
 Try asking for something specific:
 +
 {blank}
@@ -288,12 +298,11 @@ The bot responds with something like:
 :fig-bot-msg: I'm sorry, I don't have the capability to retrieve that PDF right now.
 include::_figures/rc-interaction.adoc[]
 +
-The bot knows what to do from the system prompt which describes its role and capabilities, but the tools are not yet visible to the agent, so it can't act on any request.
+As expected, the bot declines the request.
 +
-[TIP]
 --
 .Why did the bot respond that way?
-[%collapsible]
+[caption=]
 ====
 In short, the tools exist in the project but the AI agent can't see them yet.
 
@@ -316,10 +325,11 @@ Once you register the tools, the agent will discover and use them automatically.
 
 The project includes a number of tools that integrate with the necessary backends — but the agent doesn't know about them yet. Camel uses _tags_ to match agents with their tools: when an agent's tag matches a tool's tag, the tool becomes available.
 
-[TIP]
+[.indent2]
 --
 .How are tools defined in Apache Camel?
-[%collapsible]
+//[%collapsible]
+[caption=]
 ====
 In Camel, a tool is just a regular route that starts with the `langchain4j-tools` component. The route describes what the tool does — the agent discovers it automatically via tags and invokes it when needed.
 

@@ -1,7 +1,7 @@
 * xref:index.adoc[Home]
 
-* xref:intro/intro.0.adoc[Introduction]
-** xref:intro/intro.0.adoc[Workshop Overview]
+* xref:intro/intro.1.adoc[Introduction]
+// ** xref:intro/intro.0.adoc[Workshop Overview]
 ** xref:intro/intro.1.adoc[The Workshop Journey]
 ** xref:intro/intro.2.adoc[Development Environment]
 

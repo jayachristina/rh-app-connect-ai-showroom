@@ -18,6 +18,8 @@ image::m2/prereq.png[width=50%]
 {empty} +
 --
 
+NOTE: Matrix and Rocket.Chat are messaging platforms similar to Slack, Telegram, or WhatsApp. This workshop uses them because they can be self-hosted on OpenShift, so no external accounts are needed.
+
 {empty} +
 
 === The messaging scenario

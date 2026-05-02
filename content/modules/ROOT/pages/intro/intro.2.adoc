@@ -19,40 +19,6 @@ OpenShift Dev Spaces is included with your OpenShift subscription and is availab
 
 {empty} +
 
-
-=== Tools and components overview
-
-If you haven't recently used _Apache Camel_ or any of the other tools before, it's important you read below all the pieces that are at play, and understand they are conceived to converge into providing a unified development experience.
-
-Below you have a brief introduction to the set of tools and components you're about to use and to help you all along the workshop:
-
-NOTE: It's a long list, but don't worry, the workshop will present them one at a time and guide you on every step of the way.
-
-- *Dev Spaces / VS Code*: the IDE you'll be using to create the _Camel_ processes.
-- *Apache Camel*: the integration framework you'll use packed with Enterprise Integration Patterns and Components (connectors).
-- *Kaoto*: visual editor for _Apache Camel_ to create your _Camel_ routes and processes in VS Code.
-- *Camel JBang*: _Camel_ CLI (command line interface) designed to boost prototyping and accelerate your work to create, test and deploy your applications.
-- *Quarkus*: The runtime used by _Camel_ to deploy your integration processes on _OpenShift_
-- *OpenShift*: _Kubernetes_ environment where you will deploy your _Camel_ project.
-- *OpenShift client*: OpenShift's CLI (command line interface) to help users manage projects in the environment.
-
-{empty} +
-
-=== Java-Lite
-
-One big highlight of the exercises you're about to embark on is that although _Apache Camel_ is _Java_ based, there will be little need in using _Java_, nor having to define or manage dependencies. Those concerns are kept hidden to allow the developer become more productive by focussing on the business case at hand.
-
-NOTE: It goes without saying that at any moment in time _Java_ code can be injected within your _Apache Camel_ processes to incorporate the custom handling you need. _Apache Camel_ excels in this respect thanks to its open framework architecture and extensibility. The workshop will show you a great example of that.
-
-{empty} +
-
-
-=== Accessing a Development Environment
-
-The development environment you use throughout the workshop is a web-hosted IDE known as link:https://developers.redhat.com/products/codeready-workspaces/overview[Red Hat OpenShift Dev Spaces, window="_blank"].
-
-{empty} +
-
 === Log in OpenShift Dev Spaces
 
 To access your development environment:
@@ -103,6 +69,7 @@ This will start an instance of the workspace. Please wait a few moments while it
 
 . When the IDE appears:
 +
+--
 .. Ensure you click `Yes, I trust the authors` when the following message shows on your screen:
 +
 image::intro/devspaces-trust-authors.png[Trust Workshop Project, role="integr8ly-img-responsive", width=40%]
@@ -114,20 +81,57 @@ image::intro/devspaces-trust-authors.png[Trust Workshop Project, role="integr8ly
 image::intro/devspaces-trust-redhat.png[Trust Publisher Red Hat, width=40%]
 +
 {empty} +
-
-
-. Close the `Get Started...` tab by clicking the pass:[<span style="background-color: black; color: white;">&nbsp;&nbsp;x&nbsp;&nbsp;</span>]. +
-The Explorer shows you the *workshop* folder where you will be working.
-+
-image::intro/devspaces-get-started.png[Dev Spaces Get Started screen, role="integr8ly-img-responsive"]
+--
 +
 NOTE: This IDE is based on _Microsoft VS Code_. It will look familiar if you have already used it.
 +
-You might get extra tabs opening, close them all:
+{empty} +
+
+
+
+. Close all the tabs in the editor.
 +
-image::intro/close-tabs.jpg[width=30%]
+--
+Find the menu in the top right corner of the editor and click as follows:
+
+[.indent2]
+[#close-tabs-img]
+image::common/dev-close-tabs.png[width=50%]
+
+[.overlay]
+****
+[.target]
+close-tabs-img
+
+[.arrows]
+{x: 97, y: 30, rot: 270, size: 2}
+{x: 97, y: 68, rot: 270, size: 2}
+
+[.numbers]
+{x: 138, y: 30, size: 3}
+{x: 138, y: 68, size: 3}
+****
+
+{blank}
+
+1. Click the kbd:[...] button +
+1. Select  kbd:[Close All].
+--
 +
 {empty} +
+
+// . Close the `Get Started...` tab by clicking the pass:[<span style="background-color: black; color: white;">&nbsp;&nbsp;x&nbsp;&nbsp;</span>]. +
+// The Explorer shows you the *workshop* folder where you will be working.
+// +
+// image::intro/devspaces-get-started.png[Dev Spaces Get Started screen, role="integr8ly-img-responsive"]
+// +
+// NOTE: This IDE is based on _Microsoft VS Code_. It will look familiar if you have already used it.
+// +
+// You might get extra tabs opening, close them all:
+// +
+// image::intro/close-tabs.jpg[width=30%]
+// +
+// {empty} +
 
 
 === Open a Terminal
@@ -185,18 +189,18 @@ image::intro/clipboard-settings.png[width=100%]
 {empty} +
 
 
-=== Tips for a Better Learning
+// === Tips for a Better Learning
 
-If you have a wide or multi-monitor setup, it is mostly recommended to organise your browser tabs with the _Dev Spaces_ view next to your lab instructions side by side, as per the image below:
+// If you have a wide or multi-monitor setup, it is mostly recommended to organise your browser tabs with the _Dev Spaces_ view next to your lab instructions side by side, as per the image below:
 
-[.text-center]
-image::intro/better-learning.png[width=80%]
+// [.text-center]
+// image::intro/better-learning.png[width=80%]
 
-{empty} +
+// {empty} +
 
-You're now all set and ready to start your ride.
+// You're now all set and ready to start your ride.
 
-{empty} +
+// {empty} +
 
 
 

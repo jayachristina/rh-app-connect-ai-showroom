@@ -174,7 +174,7 @@ Reading left to right, the route:
 
 * `unmarshal` — parses the raw EDI data into a structured format using the X12-850 schema
 * pass:[<code style="background-color: #4494E5; color: white;">&nbsp;To do: Update&nbsp;</code>] — contains the `kaoto-datamapper` step where the EDI-to-XML field mappings are defined
-* `setVariable` — extracts the invoice ID from the resulting XML for use downstream
+* `get invoiceid` — (set variable step) obtains the invoice ID from the resulting XML for use downstream
 
 {empty} +
 
@@ -190,12 +190,12 @@ image::m1/kaoto-datamapper-overview.png[width=100%]
 
 ==== Open and explore the data mapping
 
-. *Open the data mapper*
+. *Find the data mappeing definition as follows:*
 +
 --
-Click the `kaoto-datamapper` step inside the pass:[<code style="background-color: #4494E5; color: white;">&nbsp;To do: Update&nbsp;</code>] container — this is where the EDI-to-XML field mappings are defined. Now:
-
+[lowerroman]
 . Click the `kaoto-datamapper` step inside the pass:[<code style="background-color: #4494E5; color: white;">&nbsp;To do: Update&nbsp;</code>] container
+
 . Click the pass:a[<span {btn-stl-blue}>{map-wrench}  Configure</span>] button to open the data mapper
 --
 +
@@ -212,13 +212,13 @@ image::m1/kaoto-datamapper-mappings.png[width=90%]
 
 . *Explore the mappings*
 +
-On the right side (Target), scroll down to the *Seller > Address* section. Each address field is mapped using XPath expressions that extract values from the original EDI data.
+On the right side (Target), find near the top the *Seller > Address* section. Each address field is mapped using XPath expressions that extract values from the original EDI data.
 +
 {empty} +
 
 . *Personalise the Seller information*
 +
-In this invoice, *you* are the Seller. The Seller fields currently pull values from the EDI source using XPath expressions — let's replace them with your own location. Overwrite the following fields in the *Target* with hardcoded values:
+In this invoice, *you* are the Seller. let's replace its fields with your own location. Overwrite the following fields in the *Target* with hardcoded values:
 +
 --
 ... `Name` — your company or building name, e.g. `"My Company Inc"` +

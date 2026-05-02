@@ -7,6 +7,8 @@ include::partial$style.adoc[]
 
 The integration flow needs access to the database, but it isn't reachable yet. Let's find out why, and enable the connection.
 
+NOTE: This exercise uses a single cluster to keep things focused, but Service Interconnect is designed for far more than a network policy can handle — multi-site meshes spanning clusters, regions, and cloud providers. A brief real-world example at the end shows it in that broader context.
+
 {empty} +
 
 === Why can't you reach the database?
@@ -37,7 +39,7 @@ flowchart LR
     style DB fill:#336,color:#fff
 ----
 
-Try it yourself — run a simple query against the database:
+Try it yourself — run a simple query against the database (from your terminal in _Dev Spaces_):
 
 {blank}
 
@@ -70,7 +72,7 @@ sql postgres.shared-database.svc:5432 \
 [%collapsible]
 ====
 * `sql` — a lab helper script that connects to a PostgreSQL database and runs a query
-* `postgres.shared-database.svc:5432` — the database service, namespace, and PostgreSQL port
+* `postgres.shared-database.svc:5432` — database address: service, namespace, and port
 * `"SELECT count(*) FROM invoices"` — counts the number of records in the database
 ====
 --
@@ -138,9 +140,9 @@ From your application's perspective, the database will appear as a local service
 
 {empty} +
 
-NOTE: In this exercise you're connecting two namespaces on the same cluster — a deliberately simple setup to focus on learning the core concepts. You might wonder why Service Interconnect is needed for something that could be solved with a simple network policy. The answer is scale: Service Interconnect is designed for multi-site networks where services span multiple clusters, regions, and cloud providers — with many connections sharing the same secure mesh. What you learn here applies directly to those real-world scenarios. We'll look at a brief example at the end of this exercise.
+//NOTE: In this exercise you're connecting two namespaces on the same cluster — a deliberately simple setup to focus on learning the core concepts. You might wonder why Service Interconnect is needed for something that could be solved with a simple network policy. The answer is scale: Service Interconnect is designed for multi-site networks where services span multiple clusters, regions, and cloud providers — with many connections sharing the same secure mesh. What you learn here applies directly to those real-world scenarios. We'll look at a brief example at the end of this exercise.
 
-{empty} +
+//{empty} +
 
 === Under the hood
 
@@ -254,7 +256,7 @@ In this exercise, that translates to:
 . Generate an *AccessGrant* so the database namespace can connect to you
 . Create an *AccessToken* in the database namespace to establish the link
 
-*Expose the database service* — make the remote database accessible locally:
+*Expose the database service* — make the remote database accessible locally (in `{username}-devspaces`):
 
 [start=4]
 . A *Connector* already bridges the Skupper network to PostgreSQL on port `5432` _(pre-configured)_

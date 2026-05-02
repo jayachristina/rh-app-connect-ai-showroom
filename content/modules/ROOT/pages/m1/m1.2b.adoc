@@ -79,25 +79,12 @@ sequenceDiagram
 
 === Prepare the working folder
 
-The following steps set up the files you'll need for the flow implementation exercise:
+[.indent2]
+include::../_shared/close-tabs.adoc[]
 
-{empty} +
-
-. Close tabs
-+
-Before you start, make sure you close in your editor all the tabs (source files) from the previous exercise.
-+
-image::m3/dev-close-tabs.png[width=100%]
+. From your terminal in _Dev Spaces_, run the following command:
 +
 {blank}
-+
-1. Click on the file explorer's `...` button +
-1. Ensure your `Open Editors` is ticked [√] +
-1. Click the `Close all Editors` button.
-+
-{empty} +
-
-. Setup your working folder
 +
 [.copypaste]
 ****
@@ -137,9 +124,6 @@ pass:[<mark style="padding-left: 1rem; background-color: white; color: #ce6a32">
 pass:[<mark style="padding-left: 1rem; background-color: white; color: grey"><b>&nbsp;≡&nbsp;&nbsp;</b></mark>] *template-pdf.xsl* +
 pass:[<mark style="padding-left: 1rem; background-color: white; color: orange"><b>&nbsp;≋&nbsp;&nbsp;</b></mark>] *X12-850.dfdl.xsd* +
 pass:[<mark style="padding-left: 1rem; background-color: white; color: #ce6a32"><b>&nbsp;J&nbsp;&nbsp;</b></mark>] *x12.java* +
-
-[.indent2]
-NOTE: Make sure the files are visible in your file explorer in the left panel of _VSCode_.
 
 TIP: The `index.html` file is a simple shopping app that simulates a customer placing purchase orders. Camel JBang can serve static HTML alongside your routes, so you'll use it in the next sections to trigger orders and test your integration end to end.
 --

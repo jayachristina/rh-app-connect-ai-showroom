@@ -5,23 +5,12 @@ include::partial$style.adoc[]
 [id="setup-lab4"]
 == Setup the Lab working folder
 
-The following steps prepare the files you'll need for the AI customer support exercise:
+[.indent2]
+include::../_shared/close-tabs.adoc[]
 
-. Close tabs
-+
-Before you start, make sure you close in your editor all the tabs (source files) from the previous exercise.
-+
-image::m4/dev-close-tabs.png[width=100%]
+. From your terminal in _Dev Spaces_, run the following command:
 +
 {blank}
-+
-1. Click on the file explorer's `...` button +
-1. Ensure your `Open Editors` is ticked [√] +
-1. Click the `Close all Editors` button.
-+
-{empty} +
-
-. Setup your working folder
 +
 [.copypaste]
 ****
@@ -66,9 +55,6 @@ pass:[<mark style="padding-left: 1rem; background-color: white; color: grey"><b>
 
 [.indent2]
 NOTE: The `application.properties` file contains pre-configured settings for your environment — including AI model configuration and endpoint connectivity (database, S3 storage, and HelpDesk). It's ready to use, so you can focus on building the agentic flow.
-
-[.indent2]
-NOTE: Make sure the files are visible in your file explorer in the left panel of _VSCode_.
 --
 +
 {empty} +
